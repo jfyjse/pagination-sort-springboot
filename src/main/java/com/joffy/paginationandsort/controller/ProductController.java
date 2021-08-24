@@ -32,8 +32,14 @@ public class ProductController {
     }
 
     @GetMapping("/pagination/{offset}/{pageSize}")
-    private APIResponse<Page<ProductEntity>> getProductsWithSort(@PathVariable int offset, @PathVariable int pageSize) {
+    private APIResponse<Page<ProductEntity>> getProductsWithPagination(@PathVariable int offset, @PathVariable int pageSize) {
         Page<ProductEntity> allProducts = productService.findProductPagination(offset, pageSize);
+        return new APIResponse<>(allProducts.getSize(), allProducts);
+    }
+
+    @GetMapping("/paginationAndSort/{offset}/{pageSize}/{input}")
+    private APIResponse<Page<ProductEntity>> getProductsWithSortPagination(@PathVariable int offset, @PathVariable int pageSize, @PathVariable String input) {
+        Page<ProductEntity> allProducts = productService.findProductPaginationSort(offset, pageSize, input);
         return new APIResponse<>(allProducts.getSize(), allProducts);
     }
 }

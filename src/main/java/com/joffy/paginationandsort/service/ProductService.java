@@ -35,8 +35,11 @@ public class ProductService {
         return productRepository.findAll(Sort.by(Sort.Direction.ASC,input));
     }
     public Page<ProductEntity> findProductPagination(int offset, int pageSize){
-        Page<ProductEntity> productEntityPage= productRepository.findAll(PageRequest.of(offset,pageSize));
-        return productEntityPage;
+        return productRepository.findAll(PageRequest.of(offset,pageSize));
+    }
+
+    public Page<ProductEntity> findProductPaginationSort(int offset, int pageSize, String input){
+        return productRepository.findAll(PageRequest.of(offset,pageSize).withSort(Sort.by(Sort.Direction.ASC, input)));
     }
 
 }
