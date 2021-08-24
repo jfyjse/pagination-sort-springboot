@@ -3,6 +3,7 @@ package com.joffy.paginationandsort.service;
 import com.joffy.paginationandsort.entity.ProductEntity;
 import com.joffy.paginationandsort.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -26,6 +27,10 @@ public class ProductService {
 
     public List<ProductEntity> findAllProducts(){
         return productRepository.findAll();
+    }
+
+    public List<ProductEntity> findProductSort(String input){
+        return productRepository.findAll(Sort.by(Sort.Direction.ASC,input));
     }
 
 }
