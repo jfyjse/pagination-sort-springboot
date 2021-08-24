@@ -3,6 +3,8 @@ package com.joffy.paginationandsort.service;
 import com.joffy.paginationandsort.entity.ProductEntity;
 import com.joffy.paginationandsort.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +33,10 @@ public class ProductService {
 
     public List<ProductEntity> findProductSort(String input){
         return productRepository.findAll(Sort.by(Sort.Direction.ASC,input));
+    }
+    public Page<ProductEntity> findProductPagination(int offset, int pageSize){
+        Page<ProductEntity> productEntityPage= productRepository.findAll(PageRequest.of(offset,pageSize));
+        return productEntityPage;
     }
 
 }
